@@ -1,0 +1,78 @@
+#!/usr/bin/env node
+
+const inquirer = require('inquirer');
+const download = require('download-git-repo');
+const argv = require('yargs').argv;
+
+const ora = require('ora');
+const fs = require('fs');
+const spinner = ora('downloading template ...');
+
+const questions = [{
+    type: 'input',
+    name: 'projectName',
+    message: '请输入项目名称：',
+    validate (val) {
+        if(!val) {
+            return '请输入文件名';
+        }
+        if(fs.existsSync(val)) {
+            return '文件已存在';
+        }else {
+            return true;
+        };
+    }
+},{
+    type: 'input',
+    name: 'version',
+    message: 'verson(1.0.0)：',
+    default: '1.0.0',
+    validate (val) {
+        return true;
+    }
+},{
+    type: 'input',
+    name: 'repository',
+    message: 'repository(@mhh)：',
+    default: 'mamahui/vue-template'
+}];
+
+const editFile = function({ version, projectName }) {
+    fs.readFile(`${process.cwd()}/${projectName}/package.json`, (err, data) => {
+        if (err) throw err;
+        let _data = JSON.parse(data.toString())
+        _data.name = projectName
+        _data.version = version
+        let str = JSON.stringify(_data, null, 4);
+        fs.writeFile(`${process.cwd()}/${projectName}/package.json`, str, function (err) {
+            if (err) throw err;
+        })
+        spinner.succeed();
+    });
+};
+
+/**
+ * @description: 下载模板
+ * @param {type}
+ * @return:
+ */
+const downloadTemplate = function({ repository, version, projectName }) {
+    download(repository, projectName, { clone: true }, function (err) {
+        console.log(err ? '模板加载错误' : '模板加载结束');
+        if(err !== 'Error') {
+            editFile({ version, projectName });
+        }
+    })
+};
+
+inquirer
+    .prompt(questions)
+    .then(answers => {
+        const version = answers.version;
+        const projectName = answers.projectName;
+        const repository = answers.repository;
+       
+        spinner.start();
+        spinner.color = 'green';
+        downloadTemplate({ repository, version, projectName });
+    });
