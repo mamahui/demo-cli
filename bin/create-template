@@ -11,7 +11,8 @@ const spinner = ora('downloading template ...');
 const questions = [{
     type: 'input',
     name: 'projectName',
-    message: '请输入项目名称：',
+    message: '请输入项目名称
+    ：',
     validate (val) {
         if(!val) {
             return '请输入文件名';
@@ -33,8 +34,8 @@ const questions = [{
 },{
     type: 'input',
     name: 'repository',
-    message: 'repository(@mhh)：',
-    default: 'mamahui/vue-template'
+    message: '请输入仓库需要拉取的仓库地址',
+    default: 'https://github.com:mamahui/vue-template#master'
 }];
 
 const editFile = function({ version, projectName }) {
@@ -57,7 +58,9 @@ const editFile = function({ version, projectName }) {
  * @return:
  */
 const downloadTemplate = function({ repository, version, projectName }) {
+console.log(repository, version, projectName)
     download(repository, projectName, { clone: true }, function (err) {
+        console.log(err)
         console.log(err ? '模板加载错误' : '模板加载结束');
         if(err !== 'Error') {
             editFile({ version, projectName });
@@ -71,8 +74,12 @@ inquirer
         const version = answers.version;
         const projectName = answers.projectName;
         const repository = answers.repository;
-       
+
         spinner.start();
         spinner.color = 'green';
         downloadTemplate({ repository, version, projectName });
     });
+
+
+
+

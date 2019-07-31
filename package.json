@@ -1,5 +1,5 @@
 {
-  "name": "demo-cli",
+  "name": "mhh-cli",
   "version": "1.0.0",
   "description": "learn to make a cli",
   "main": "index.js",
@@ -9,15 +9,19 @@
   "bin": {
     "@mhh": "./bin/create-template"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mamahui/demo-cli.git"
+  },
   "author": "mahui",
   "license": "ISC",
   "dependencies": {
     "chalk": "^2.4.2",
-    "commander": "^2.20.0",
-    "download-git-repo": "^2.0.0",
-    "inquirer": "^6.5.0",
-    "ora": "^3.4.0",
+    "commander": "^2.19.0",
+    "download-git-repo": "^1.1.0",
+    "inquirer": "^6.2.2",
+    "ora": "^3.2.0",
     "shelljs": "^0.8.3",
-    "yargs": "^13.3.0"
+    "yargs": "^13.2.2"
   }
 }
