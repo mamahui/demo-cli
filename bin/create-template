@@ -57,13 +57,12 @@ const editFile = function({ version, projectName }) {
  * @return:
  */
 const downloadTemplate = function({ repository, version, projectName }) {
-console.log(repository, version, projectName)
     download(repository, projectName, { clone: true }, function (err) {
-        console.log(err)
         console.log(err ? '模板加载错误' : '模板加载结束');
         if(err !== 'Error') {
             editFile({ version, projectName });
-        }
+        } else {
+        spinner.succeed();}
     })
 };
 
