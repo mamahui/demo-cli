@@ -11,8 +11,7 @@ const spinner = ora('downloading template ...');
 const questions = [{
     type: 'input',
     name: 'projectName',
-    message: '请输入项目名称
-    ：',
+    message: '请输入项目名称：',
     validate (val) {
         if(!val) {
             return '请输入文件名';
