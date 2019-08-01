@@ -1,13 +1,14 @@
 {
   "name": "mhh-cli",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "learn to make a cli",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish": "npm publish"
   },
   "bin": {
-    "@mhh": "./bin/create-template"
+    "@mhh": "./bin/create-template.js"
   },
   "repository": {
     "type": "git",
