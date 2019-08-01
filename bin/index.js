@@ -72,8 +72,8 @@ const downloadTemplate = function({ repository, version, description, projectNam
         console.log(chalk.green(`开始项目:  cd ${projectName} && npm install`));
     });
 };
- if (argvs[2] === '-V') {require('./version.js');
-} else if (argvs[2] === 'init') {
+ if (argvs[2].toUpperCase() === '-V') {require('./version.js');
+} else if (argvs[2].toUpperCase() === 'INIT') {
     inquirer
     .prompt(questions)
     .then(answers => {
