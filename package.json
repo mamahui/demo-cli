@@ -1,6 +1,6 @@
 {
   "name": "mhh-cli",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "learn to make a cli",
   "main": "index.js",
   "scripts": {
