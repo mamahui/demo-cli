@@ -2,12 +2,12 @@
 
 const inquirer = require('inquirer'); //交互式输入
 const download = require('download-git-repo');// 从git拉取模板
-const argv = require('yargs').argv; //
 const ora = require('ora');
 const fs = require('fs');
 const chalk = require('chalk');
 const spinner = ora('downloading template ...');
 
+const argvs = process.argv;
 const questions = [
     {
         type: 'input', name: 'projectName', message: 'please input project name:', validate (val) {
@@ -37,7 +37,6 @@ const questions = [
         default: 'https://github.com:mamahui/vue-template#master'
     }
 ];
-
 const editFile = function({ version, projectName, description }) {
     fs.readFile(`${process.cwd()}/${projectName}/package.json`, (err, data) => {
         if (err) throw err;
@@ -73,18 +72,23 @@ const downloadTemplate = function({ repository, version, description, projectNam
         console.log(chalk.green(`开始项目:  cd ${projectName} && npm install`));
     });
 };
-inquirer
-.prompt(questions)
-.then(answers => {
-    const version = answers.version;
-    const projectName = answers.projectName;
-    const description = answers.description;
-    const repository = answers.repository;
-    
-    spinner.start();
-    spinner.color = 'green';
-    downloadTemplate({ repository, version, description,projectName });
-});
+ if (argvs[2] === '-V') {require('./version.js');
+} else if (argvs[2] === 'init') {
+    inquirer
+    .prompt(questions)
+    .then(answers => {
+        const version = answers.version;
+        const projectName = answers.projectName;
+        const description = answers.description;
+        const repository = answers.repository;
+        
+        spinner.start();
+        spinner.color = 'green';
+        downloadTemplate({ repository, version, description,projectName });
+    });
+} else {
+    return require('./tips.js');
+}
 
 
 

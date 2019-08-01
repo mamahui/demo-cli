@@ -1,6 +1,6 @@
 {
   "name": "mhh-cli",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "learn to make a cli",
   "main": "index.js",
   "scripts": {
@@ -8,10 +8,7 @@
     "publish": "npm publish"
   },
   "bin": {
-    "@mhh": "./bin/tips.js",
-    "@mhh init": "./bin/create-template.js",
-    "@mhh -V": "./bin/version.js",
-    "@mhh -H": "./bin/tips.js"
+    "@mhh": "./bin/create-template.js"
   },
   "repository": {
     "type": "git",
