@@ -8,7 +8,10 @@
     "publish": "npm publish"
   },
   "bin": {
-    "@mhh": "./bin/create-template.js"
+    "@mhh": "./bin/tips.js",
+    "@mhh init": "./bin/create-template.js",
+    "@mhh -V": "./bin/version.js",
+    "@mhh -H": "./bin/tips.js"
   },
   "repository": {
     "type": "git",
